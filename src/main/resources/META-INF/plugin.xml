@@ -1,0 +1,33 @@
+<idea-plugin>
+    <id>ulrichbarnstedt.plug.IJ_teams</id>
+    <name>Teams Integration</name>
+    <vendor email="ulrich.barnstedt@gmail.com" url="https://github.com/ulrich-barnstedt">Ulrich Barnstedt</vendor>
+
+    <description><![CDATA[
+        Teams integration for Intellij for automating submissions.
+    ]]></description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="ulrichbarnstedt.plug.ijt.settings.IJTSettingsState"/>
+        <applicationConfigurable parentId="tools"
+                                 instance="ulrichbarnstedt.plug.ijt.settings.IJSettingsConfigurable"
+                                 id="ulrichbarnstedt.plug.ijt.settings.IJSettingsConfigurable"/>
+        />
+        
+        <toolWindow factoryClass="ulrichbarnstedt.plug.ijt.ui.MainPanelFactory"
+                    id="Teams"
+                    anchor="right"
+        />
+    </extensions>
+
+    <actions>
+        <action id="ulrichbarnstedt.plug.ijt.TestAction" class="ulrichbarnstedt.plug.ijt.TestAction" text="Test action"
+                description="An action, a test">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
