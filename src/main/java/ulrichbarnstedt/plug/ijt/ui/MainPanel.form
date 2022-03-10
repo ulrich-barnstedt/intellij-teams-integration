@@ -64,8 +64,9 @@
             <properties>
               <editable value="false"/>
               <font name="Consolas"/>
-              <lineWrap value="true"/>
-              <margin top="0" left="0" bottom="0" right="0"/>
+              <lineWrap value="false"/>
+              <margin top="3" left="3" bottom="3" right="3"/>
+              <text value=""/>
             </properties>
           </component>
         </children>

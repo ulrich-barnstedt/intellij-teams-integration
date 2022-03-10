@@ -1,16 +1,16 @@
 package ulrichbarnstedt.plug.ijt.backend;
 
 import java.nio.file.Path;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 public class Setup {
     private Setup () {}
 
-    public static void run (Consumer<String> log, Path pluginDir) {
-        log.accept("Downloading required files ... \n");
+    public static void run (BiConsumer<String, String> log, Path pluginDir) {
+        log.accept("PRE-EX", "Downloading required files ... \n");
 
         //TODO: git clone in plugin wd
 
-        log.accept("Finished downloading. \n");
+        log.accept("PRE-EX", "Finished downloading. \n");
     }
 }
