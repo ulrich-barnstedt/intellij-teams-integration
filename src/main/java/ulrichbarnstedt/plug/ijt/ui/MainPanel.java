@@ -52,16 +52,19 @@ public class MainPanel {
         Path projectDirectory = Paths.get(assumedLocation);
 
         boolean setup = false;
-        ConfirmPrompt userAgreement = new ConfirmPrompt(
-            "First upload run",
-            "The files required for the plugin to run have not been downloaded yet, as this is the first upload being run.\nAbout 300mb of files will be downloaded.",
-            "Download", "Cancel"
-        );
-        if (Files.notExists(pluginDirectory) && userAgreement.query()) {
-            setup = true;
-        } else {
-            this.uploadButton.setEnabled(true);
-            return;
+        if (Files.notExists(pluginDirectory)) {
+            ConfirmPrompt userAgreement = new ConfirmPrompt(
+                "First upload run",
+                "The files required for the plugin to run have not been downloaded yet, as this is the first upload being run.\nAbout 300mb of files will be downloaded.",
+                "Download", "Cancel"
+            );
+
+            if (userAgreement.query()) {
+                setup = true;
+            } else {
+                this.uploadButton.setEnabled(true);
+                return;
+            }
         }
 
         this.runOutsideEDT(setup, pluginDirectory, projectDirectory);
