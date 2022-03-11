@@ -14,7 +14,16 @@ import java.nio.file.Path;
 import java.util.function.BiConsumer;
 
 public class StdRunner {
-    public static boolean execute (BiConsumer<String, String> log, Path cwd, String globalTag, String subTag, String preError, String postError, String exe, String ... args) {
+    public static boolean execute (
+        BiConsumer<String, String> log,
+        Path cwd,
+        String globalTag,
+        String subTag,
+        String preError,
+        String postError,
+        String exe,
+        String ... args
+    ) {
         String subTagPrefix = subTag.equals("") ? "" : "[" + subTag + "] ";
 
         GeneralCommandLine cmd = new GeneralCommandLine();

@@ -7,6 +7,7 @@ import com.intellij.util.concurrency.SwingWorker;
 import ulrichbarnstedt.plug.ijt.backend.Setup;
 import ulrichbarnstedt.plug.ijt.backend.Wrapper;
 import ulrichbarnstedt.plug.ijt.settings.IJTSettingsState;
+import ulrichbarnstedt.plug.ijt.util.StdRunner;
 
 import javax.swing.*;
 import java.nio.file.Files;
@@ -21,10 +22,15 @@ public class MainPanel {
     private JTextArea logPane;
     private JBTextField projectField;
     private JBTextField statusField;
+    private JButton updateBackendButton;
+    private JComboBox<String> taskStatusDropdown;
+
     private final Project currentProject;
+    private final Path pluginDirectory;
 
     public MainPanel (Project project) {
         this.currentProject = project;
+        this.pluginDirectory = Paths.get(PathManager.getPluginsPath() + "/IJ_teams/backend");
 
         projectField.getEmptyText().setText("Project");
         statusField.getEmptyText().setText("Status");
@@ -34,6 +40,10 @@ public class MainPanel {
             this.handleButton();
         });
 
+        updateBackendButton.addActionListener(e -> {
+            this.updateBackendButton.setEnabled(false);
+            this.handleUpdate();
+        });
     }
 
     public void addLog (String tag, String content) {
@@ -47,14 +57,12 @@ public class MainPanel {
             this.uploadButton.setEnabled(true);
             return;
         }
-
-        Path pluginDirectory = Paths.get(PathManager.getPluginsPath() + "/IJ_teams/backend");
         Path projectDirectory = Paths.get(assumedLocation);
 
         boolean setup = false;
         if (Files.notExists(pluginDirectory)) {
             ConfirmPrompt userAgreement = new ConfirmPrompt(
-                "First upload run",
+                "Missing files",
                 "The files required for the plugin to run have not been downloaded yet, as this is the first upload being run.\nAbout 300mb of files will be downloaded.",
                 "Download", "Cancel"
             );
@@ -67,17 +75,17 @@ public class MainPanel {
             }
         }
 
-        this.runOutsideEDT(setup, pluginDirectory, projectDirectory);
+        this.runOutsideEDT(setup, projectDirectory);
     }
 
-    private void runOutsideEDT (boolean setup, Path pluginDirectory, Path projectDirectory) {
+    private void runOutsideEDT (boolean setup, Path projectDirectory) {
         MainPanel outer = this;
 
         SwingWorker<Void> bgRunner = new SwingWorker<Void>() {
             @Override
             public Void construct () {
                 if (setup) {
-                    Setup.run(outer::addLog, pluginDirectory);
+                    Setup.install(outer::addLog, pluginDirectory);
                 }
 
                 outer.addLog(
@@ -85,7 +93,13 @@ public class MainPanel {
                     String.format("Starting upload (%s)\n", new SimpleDateFormat("hh:mm:ss").format(new Date()))
                 );
 
-                Wrapper runWrapper = new Wrapper(pluginDirectory, projectDirectory, IJTSettingsState.getInstance().teamID, projectField.getText(), statusField.getText());
+                Wrapper runWrapper = new Wrapper(
+                    outer.pluginDirectory,
+                    projectDirectory, IJTSettingsState.getInstance().teamID,
+                    projectField.getText(),
+                    statusField.getText(),
+                    taskStatusDropdown.getSelectedItem().toString()
+                );
                 runWrapper.run(outer::addLog);
 
                 outer.uploadButton.setEnabled(true);
@@ -94,6 +108,36 @@ public class MainPanel {
         };
 
         bgRunner.start();
+    }
+
+    private void handleUpdate () {
+        this.addLog("UPDATE", "Starting backend update ...\n");
+        MainPanel that = this;
+
+        SwingWorker<Void> sw = new SwingWorker<Void>() {
+            @Override
+            public Void construct () {
+                if (!StdRunner.execute(
+                    that::addLog,
+                    that.pluginDirectory,
+                    "UPDATE",
+                    "GIT",
+                    "Error attempting to pull repository. Exception:\n",
+                    "Pull failed. There is most likely more information above. \n",
+                    "git",
+                    "pull"
+                )) {
+                    updateBackendButton.setEnabled(true);
+                    return null;
+                }
+
+                that.addLog("UPDATE", "Finished update.\n\n");
+                updateBackendButton.setEnabled(true);
+                return null;
+            }
+        };
+
+        sw.start();
     }
 
     public JPanel getContent () {

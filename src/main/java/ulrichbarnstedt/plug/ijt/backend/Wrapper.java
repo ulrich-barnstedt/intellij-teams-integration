@@ -13,13 +13,15 @@ public class Wrapper {
     String id;
     String project;
     String status;
+    String taskStatus;
 
-    public Wrapper (Path pluginDir, Path projectDir, String id, String project, String status) {
+    public Wrapper (Path pluginDir, Path projectDir, String id, String project, String status, String taskStatus) {
         this.pluginDir = pluginDir;
         this.projectDir = projectDir;
         this.id = id;
         this.project = project;
         this.status = status;
+        this.taskStatus = taskStatus;
     }
 
     public void run (BiConsumer<String, String> log) {
@@ -35,7 +37,8 @@ public class Wrapper {
             "node",
             "index.js", this.projectDir.toString(), this.id,
             this.project.equals("") ? "no_project" : this.project,
-            this.status.equals("") ? "no_status" : this.status
+            this.status.equals("") ? "no_status" : this.status,
+            this.taskStatus
         )) return;
 
         log.accept(
