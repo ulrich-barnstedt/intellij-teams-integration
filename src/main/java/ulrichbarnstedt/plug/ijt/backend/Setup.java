@@ -10,10 +10,6 @@ import java.util.function.BiConsumer;
 public class Setup {
     private Setup () {}
 
-    private static void pull () {
-
-    }
-
     private static boolean npm (BiConsumer<String, String> log, Path pluginDir, String group) {
         return StdRunner.execute(
             log,
@@ -27,8 +23,22 @@ public class Setup {
         );
     }
 
-    public static void update () {
+    public static boolean update (BiConsumer<String, String> log, Path pluginDir) {
+        log.accept("UPDATE", "Starting backend update ...\n");
 
+        if (!StdRunner.execute(
+            log,
+            pluginDir,
+            "UPDATE",
+            "GIT",
+            "Error attempting to pull repository. Exception:\n",
+            "Pull failed. There is most likely more information above. \n",
+            "git",
+            "pull"
+        )) return false;
+
+        log.accept("UPDATE", "Finished pull. Updating modules ... \n");
+        return npm(log, pluginDir, "UPDATE");
     }
 
     public static void install (BiConsumer<String, String> log, Path pluginDir) {

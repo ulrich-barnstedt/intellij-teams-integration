@@ -7,7 +7,6 @@ import com.intellij.util.concurrency.SwingWorker;
 import ulrichbarnstedt.plug.ijt.backend.Setup;
 import ulrichbarnstedt.plug.ijt.backend.Wrapper;
 import ulrichbarnstedt.plug.ijt.settings.IJTSettingsState;
-import ulrichbarnstedt.plug.ijt.util.StdRunner;
 
 import javax.swing.*;
 import java.nio.file.Files;
@@ -111,27 +110,17 @@ public class MainPanel {
     }
 
     private void handleUpdate () {
-        this.addLog("UPDATE", "Starting backend update ...\n");
         MainPanel that = this;
 
         SwingWorker<Void> sw = new SwingWorker<Void>() {
             @Override
             public Void construct () {
-                if (!StdRunner.execute(
-                    that::addLog,
-                    that.pluginDirectory,
-                    "UPDATE",
-                    "GIT",
-                    "Error attempting to pull repository. Exception:\n",
-                    "Pull failed. There is most likely more information above. \n",
-                    "git",
-                    "pull"
-                )) {
-                    updateBackendButton.setEnabled(true);
-                    return null;
+                if (Setup.update(that::addLog, pluginDirectory)) {
+                    that.addLog("UPDATE", "Completed update. \n\n");
+                } else {
+                    that.addLog("UPDATE", "Update failed. See information above. \n\n");
                 }
 
-                that.addLog("UPDATE", "Finished update.\n\n");
                 updateBackendButton.setEnabled(true);
                 return null;
             }
