@@ -33,13 +33,16 @@ public class Wrapper {
             "NODE",
             "",
             "Error attempting to start Node.js. Exception: \n",
-            "Upload failed. There is most likely more information above.\n",
+            "Error in Node.js process. There is most likely more information above.\n",
             "node",
             "index.js", this.projectDir.toString(), this.id,
             this.project.equals("") ? "no_project" : this.project,
             this.status.equals("") ? "no_status" : this.status,
             this.taskStatus
-        )) return;
+        )) {
+            log.accept("INTELLIJ", "Upload failed. There is most likely an error log above.\n\n");
+            return;
+        };
 
         log.accept(
             "INTELLIJ",

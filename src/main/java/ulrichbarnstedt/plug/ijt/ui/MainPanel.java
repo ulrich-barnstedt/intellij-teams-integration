@@ -3,7 +3,6 @@ package ulrichbarnstedt.plug.ijt.ui;
 import java.awt.*;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.ui.components.*;
 import com.intellij.ui.components.JBTextField;
 import com.intellij.uiDesigner.core.*;
 import com.intellij.util.concurrency.SwingWorker;
@@ -141,11 +140,11 @@ public class MainPanel {
         taskStatusLabel = new JLabel();
         taskStatusArrowLabel = new JLabel();
         taskStatusDropdown = new JComboBox<>();
-        seperator = new JSeparator();
+        spacerLabel = new JLabel();
         logLabel = new JLabel();
         scrollPane = new JScrollPane();
         logPane = new JTextArea();
-        updateBackendButton = new ActionLink();
+        updateBackendButton = new JButton();
 
         //======== content ========
         {
@@ -203,10 +202,13 @@ public class MainPanel {
                 GridConstraints.SIZEPOLICY_WANT_GROW,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK,
                 null, null, null));
-            content.add(seperator, new GridConstraints(2, 0, 1, 4,
+
+            //---- spacerLabel ----
+            spacerLabel.setText(" ");
+            content.add(spacerLabel, new GridConstraints(2, 0, 1, 4,
                 GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
                 null, null, null));
 
             //---- logLabel ----
@@ -219,18 +221,21 @@ public class MainPanel {
 
             //======== scrollPane ========
             {
+
+                //---- logPane ----
+                logPane.setEditable(false);
                 scrollPane.setViewportView(logPane);
             }
             content.add(scrollPane, new GridConstraints(4, 0, 1, 4,
                 GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
-                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW | GridConstraints.SIZEPOLICY_WANT_GROW,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW | GridConstraints.SIZEPOLICY_WANT_GROW,
                 null, null, null));
 
             //---- updateBackendButton ----
-            updateBackendButton.setText("Update backend");
+            updateBackendButton.setText("Update");
             content.add(updateBackendButton, new GridConstraints(5, 3, 1, 1,
-                GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+                GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK,
                 null, null, null));
@@ -247,10 +252,10 @@ public class MainPanel {
     private JLabel taskStatusLabel;
     private JLabel taskStatusArrowLabel;
     private JComboBox<String> taskStatusDropdown;
-    private JSeparator seperator;
+    private JLabel spacerLabel;
     private JLabel logLabel;
     private JScrollPane scrollPane;
     private JTextArea logPane;
-    private ActionLink updateBackendButton;
+    private JButton updateBackendButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

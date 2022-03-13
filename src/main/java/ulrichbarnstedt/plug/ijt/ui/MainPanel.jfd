@@ -76,11 +76,11 @@ new FormModel {
 				"vSizePolicy": 1
 				"hSizePolicy": 4
 			} )
-			add( new FormComponent( "javax.swing.JSeparator" ) {
-				name: "seperator"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "spacerLabel"
+				"text": " "
 			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 				"row": 2
-				"vSizePolicy": 1
 				"colSpan": 4
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -96,21 +96,23 @@ new FormModel {
 				name: "scrollPane"
 				add( new FormComponent( "javax.swing.JTextArea" ) {
 					name: "logPane"
+					"editable": false
 				} )
 			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 				"row": 4
 				"colSpan": 4
 				"fill": 3
+				"vSizePolicy": 7
+				"hSizePolicy": 7
 			} )
-			add( new FormComponent( "com.intellij.ui.components.ActionLink" ) {
+			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "updateBackendButton"
-				"text": "Update backend"
+				"text": "Update"
 			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 				"column": 3
 				"row": 5
 				"hSizePolicy": 1
 				"vSizePolicy": 1
-				"anchor": 4
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 365, 265 )
