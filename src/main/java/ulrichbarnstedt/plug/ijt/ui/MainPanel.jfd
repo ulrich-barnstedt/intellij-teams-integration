@@ -1,0 +1,120 @@
+JFDML JFormDesigner: "7.0.5.3.411" Java: "11.0.13" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
+			"$columnCount": 4
+			"$rowCount": 6
+			"margin": new java.awt.Insets( 5, 5, 5, 5 )
+		} ) {
+			name: "content"
+			add( new FormComponent( "com.intellij.ui.components.JBTextField" ) {
+				name: "projectField"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"fill": 1
+				"hSizePolicy": 4
+				"vSizePolicy": 1
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "statusSeperator"
+				"text": "/"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"column": 1
+				"vSizePolicy": 1
+				"hSizePolicy": 1
+			} )
+			add( new FormComponent( "com.intellij.ui.components.JBTextField" ) {
+				name: "statusField"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"column": 2
+				"fill": 1
+				"hSizePolicy": 4
+				"vSizePolicy": 1
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "uploadButton"
+				"text": "Upload"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"column": 3
+				"anchor": 4
+				"rowSpan": 2
+				"vSizePolicy": 1
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "taskStatusLabel"
+				"text": "Task Status (Document)"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"row": 1
+				"anchor": 4
+				"vSizePolicy": 1
+				"hSizePolicy": 1
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "taskStatusArrowLabel"
+				"text": "->"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"column": 1
+				"row": 1
+				"vSizePolicy": 1
+				"hSizePolicy": 1
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "taskStatusDropdown"
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "Done"
+					addElement( "Done" )
+					addElement( "InProgress" )
+				}
+				auxiliary() {
+					"JavaCodeGenerator.typeParameters": "String"
+				}
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"column": 2
+				"row": 1
+				"fill": 1
+				"vSizePolicy": 1
+				"hSizePolicy": 4
+			} )
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "seperator"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"row": 2
+				"vSizePolicy": 1
+				"colSpan": 4
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "logLabel"
+				"text": "Log"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"row": 3
+				"hSizePolicy": 1
+				"vSizePolicy": 1
+				"anchor": 8
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "logPane"
+				} )
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"row": 4
+				"colSpan": 4
+				"fill": 3
+			} )
+			add( new FormComponent( "com.intellij.ui.components.ActionLink" ) {
+				name: "updateBackendButton"
+				"text": "Update backend"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"column": 3
+				"row": 5
+				"hSizePolicy": 1
+				"vSizePolicy": 1
+				"anchor": 4
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 365, 265 )
+			"size": new java.awt.Dimension( 760, 605 )
+		} )
+	}
+}

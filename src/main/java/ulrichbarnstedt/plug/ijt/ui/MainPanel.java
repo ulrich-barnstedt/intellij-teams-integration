@@ -1,8 +1,11 @@
 package ulrichbarnstedt.plug.ijt.ui;
 
+import java.awt.*;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.ui.components.*;
 import com.intellij.ui.components.JBTextField;
+import com.intellij.uiDesigner.core.*;
 import com.intellij.util.concurrency.SwingWorker;
 import ulrichbarnstedt.plug.ijt.backend.Setup;
 import ulrichbarnstedt.plug.ijt.backend.Wrapper;
@@ -16,18 +19,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainPanel {
-    private JPanel content;
-    private JButton uploadButton;
-    private JTextArea logPane;
-    private JBTextField projectField;
-    private JBTextField statusField;
-    private JButton updateBackendButton;
-    private JComboBox<String> taskStatusDropdown;
-
     private final Project currentProject;
     private final Path pluginDirectory;
 
     public MainPanel (Project project) {
+        initComponents();
         this.currentProject = project;
         this.pluginDirectory = Paths.get(PathManager.getPluginsPath() + "/IJ_teams/backend");
 
@@ -62,7 +58,7 @@ public class MainPanel {
         if (Files.notExists(pluginDirectory)) {
             ConfirmPrompt userAgreement = new ConfirmPrompt(
                 "Missing files",
-                "The files required for the plugin to run have not been downloaded yet, as this is the first upload being run.\nAbout 300mb of files will be downloaded.",
+                "The files required for the plugin to run have not been downloaded yet, as this is the first upload being run.\nAbout 300mb of files will be downloaded. This might take a while depending on your machine.",
                 "Download", "Cancel"
             );
 
@@ -132,4 +128,129 @@ public class MainPanel {
     public JPanel getContent () {
         return content;
     }
+
+    // ------------------------- JFD plugin generations
+
+    private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        content = new JPanel();
+        projectField = new JBTextField();
+        statusSeperator = new JLabel();
+        statusField = new JBTextField();
+        uploadButton = new JButton();
+        taskStatusLabel = new JLabel();
+        taskStatusArrowLabel = new JLabel();
+        taskStatusDropdown = new JComboBox<>();
+        seperator = new JSeparator();
+        logLabel = new JLabel();
+        scrollPane = new JScrollPane();
+        logPane = new JTextArea();
+        updateBackendButton = new ActionLink();
+
+        //======== content ========
+        {
+            content.setLayout(new GridLayoutManager(6, 4, new Insets(5, 5, 5, 5), -1, -1));
+            content.add(projectField, new GridConstraints(0, 0, 1, 1,
+                GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+                GridConstraints.SIZEPOLICY_WANT_GROW,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                null, null, null));
+
+            //---- statusSeperator ----
+            statusSeperator.setText("/");
+            content.add(statusSeperator, new GridConstraints(0, 1, 1, 1,
+                GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                null, null, null));
+            content.add(statusField, new GridConstraints(0, 2, 1, 1,
+                GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+                GridConstraints.SIZEPOLICY_WANT_GROW,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                null, null, null));
+
+            //---- uploadButton ----
+            uploadButton.setText("Upload");
+            content.add(uploadButton, new GridConstraints(0, 3, 2, 1,
+                GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                null, null, null));
+
+            //---- taskStatusLabel ----
+            taskStatusLabel.setText("Task Status (Document)");
+            content.add(taskStatusLabel, new GridConstraints(1, 0, 1, 1,
+                GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                null, null, null));
+
+            //---- taskStatusArrowLabel ----
+            taskStatusArrowLabel.setText("->");
+            content.add(taskStatusArrowLabel, new GridConstraints(1, 1, 1, 1,
+                GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                null, null, null));
+
+            //---- taskStatusDropdown ----
+            taskStatusDropdown.setModel(new DefaultComboBoxModel<>(new String[] {
+                "Done",
+                "InProgress"
+            }));
+            content.add(taskStatusDropdown, new GridConstraints(1, 2, 1, 1,
+                GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+                GridConstraints.SIZEPOLICY_WANT_GROW,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                null, null, null));
+            content.add(seperator, new GridConstraints(2, 0, 1, 4,
+                GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                null, null, null));
+
+            //---- logLabel ----
+            logLabel.setText("Log");
+            content.add(logLabel, new GridConstraints(3, 0, 1, 1,
+                GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                null, null, null));
+
+            //======== scrollPane ========
+            {
+                scrollPane.setViewportView(logPane);
+            }
+            content.add(scrollPane, new GridConstraints(4, 0, 1, 4,
+                GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                null, null, null));
+
+            //---- updateBackendButton ----
+            updateBackendButton.setText("Update backend");
+            content.add(updateBackendButton, new GridConstraints(5, 3, 1, 1,
+                GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK,
+                null, null, null));
+        }
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JPanel content;
+    private JBTextField projectField;
+    private JLabel statusSeperator;
+    private JBTextField statusField;
+    private JButton uploadButton;
+    private JLabel taskStatusLabel;
+    private JLabel taskStatusArrowLabel;
+    private JComboBox<String> taskStatusDropdown;
+    private JSeparator seperator;
+    private JLabel logLabel;
+    private JScrollPane scrollPane;
+    private JTextArea logPane;
+    private ActionLink updateBackendButton;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
