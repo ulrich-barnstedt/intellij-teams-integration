@@ -9,10 +9,12 @@ import javax.swing.*;
 public class IJTSettingsComponent {
     private final JPanel mainPanel;
     private final JBTextField idTextField = new JBTextField();
+    private final JBTextField repoTextField = new JBTextField();
 
     public IJTSettingsComponent () {
         mainPanel = FormBuilder.createFormBuilder()
-            .addLabeledComponent(new JBLabel("Enter teams ID:"), idTextField, 1, false)
+            .addLabeledComponent(new JBLabel("Teams ID:"), idTextField, 1, false)
+            .addLabeledComponent(new JBLabel("Repository name:"), repoTextField, 1, false)
             .getPanel();
     }
 
@@ -26,5 +28,13 @@ public class IJTSettingsComponent {
 
     public void setIdTextField (String ID) {
         idTextField.setText(ID);
+    }
+
+    public String getRepoTextField () {
+        return repoTextField.getText();
+    }
+
+    public void setRepoTextField (String name) {
+        repoTextField.setText(name);
     }
 }

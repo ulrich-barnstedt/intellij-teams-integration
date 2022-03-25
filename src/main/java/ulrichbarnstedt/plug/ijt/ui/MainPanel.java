@@ -89,10 +89,12 @@ public class MainPanel {
 
                 Wrapper runWrapper = new Wrapper(
                     outer.pluginDirectory,
-                    projectDirectory, IJTSettingsState.getInstance().teamID,
+                    projectDirectory,
+                    IJTSettingsState.getInstance().teamID,
                     projectField.getText(),
                     statusField.getText(),
-                    taskStatusDropdown.getSelectedItem().toString()
+                    taskStatusDropdown.getSelectedItem().toString(),
+                    IJTSettingsState.getInstance().repositoryName
                 );
                 runWrapper.run(outer::addLog);
 

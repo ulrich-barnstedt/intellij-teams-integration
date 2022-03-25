@@ -23,11 +23,4 @@
                     anchor="right"
         />
     </extensions>
-
-    <actions>
-        <action id="ulrichbarnstedt.plug.ijt.TestAction" class="ulrichbarnstedt.plug.ijt.TestAction" text="Test action"
-                description="An action, a test">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </action>
-    </actions>
 </idea-plugin>

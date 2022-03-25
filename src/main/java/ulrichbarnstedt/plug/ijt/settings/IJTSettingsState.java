@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 )
 public class IJTSettingsState implements PersistentStateComponent<IJTSettingsState> {
     public String teamID = "";
+    public String repositoryName = "";
 
     @Override
     public @Nullable IJTSettingsState getState () {

@@ -25,19 +25,21 @@ public class IJSettingsConfigurable implements Configurable {
 
     @Override
     public boolean isModified () {
-        return !state.teamID.equals(component.getIdTextField());
+        return !state.teamID.equals(component.getIdTextField()) || !state.repositoryName.equals(component.getRepoTextField());
     }
 
     @Override
     public void apply () throws ConfigurationException {
         IJTSettingsState state = IJTSettingsState.getInstance();
         state.teamID = component.getIdTextField();
+        state.repositoryName = component.getRepoTextField();
     }
 
     @Override
     public void reset () {
         IJTSettingsState state = IJTSettingsState.getInstance();
         component.setIdTextField(state.teamID);
+        component.setRepoTextField(state.repositoryName);
     }
 
     @Override
