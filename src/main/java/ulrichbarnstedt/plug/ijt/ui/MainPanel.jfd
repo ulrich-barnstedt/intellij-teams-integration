@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "7.0.5.3.411" Java: "11.0.13" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.5.4.420" Java: "11.0.14.1" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
 			"$columnCount": 4
-			"$rowCount": 6
+			"$rowCount": 7
 			"margin": new java.awt.Insets( 5, 5, 5, 5 )
 		} ) {
 			name: "content"
@@ -76,18 +76,25 @@ new FormModel {
 				"vSizePolicy": 1
 				"hSizePolicy": 4
 			} )
+			add( new FormComponent( "javax.swing.JCheckBox" ) {
+				name: "shouldSubmitCheckbox"
+				"text": "Automatically press submit button on Teams"
+			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+				"row": 2
+				"colSpan": 3
+			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "spacerLabel"
 				"text": " "
 			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-				"row": 2
+				"row": 3
 				"colSpan": 4
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "logLabel"
 				"text": "Log"
 			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-				"row": 3
+				"row": 4
 				"hSizePolicy": 1
 				"vSizePolicy": 1
 				"anchor": 8
@@ -99,7 +106,7 @@ new FormModel {
 					"editable": false
 				} )
 			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-				"row": 4
+				"row": 5
 				"colSpan": 4
 				"fill": 3
 				"vSizePolicy": 7
@@ -110,13 +117,13 @@ new FormModel {
 				"text": "Update"
 			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 				"column": 3
-				"row": 5
+				"row": 6
 				"hSizePolicy": 1
 				"vSizePolicy": 1
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 365, 265 )
-			"size": new java.awt.Dimension( 760, 605 )
+			"location": new java.awt.Point( 410, 200 )
+			"size": new java.awt.Dimension( 760, 800 )
 		} )
 	}
 }

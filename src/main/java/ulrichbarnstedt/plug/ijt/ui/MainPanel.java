@@ -90,11 +90,11 @@ public class MainPanel {
                 Wrapper runWrapper = new Wrapper(
                     outer.pluginDirectory,
                     projectDirectory,
-                    IJTSettingsState.getInstance().teamID,
+                    IJTSettingsState.getInstance(),
                     projectField.getText(),
                     statusField.getText(),
                     taskStatusDropdown.getSelectedItem().toString(),
-                    IJTSettingsState.getInstance().repositoryName
+                    shouldSubmitCheckbox.isSelected()
                 );
                 runWrapper.run(outer::addLog);
 
@@ -142,6 +142,7 @@ public class MainPanel {
         taskStatusLabel = new JLabel();
         taskStatusArrowLabel = new JLabel();
         taskStatusDropdown = new JComboBox<>();
+        shouldSubmitCheckbox = new JCheckBox();
         spacerLabel = new JLabel();
         logLabel = new JLabel();
         scrollPane = new JScrollPane();
@@ -150,7 +151,7 @@ public class MainPanel {
 
         //======== content ========
         {
-            content.setLayout(new GridLayoutManager(6, 4, new Insets(5, 5, 5, 5), -1, -1));
+            content.setLayout(new GridLayoutManager(7, 4, new Insets(5, 5, 5, 5), -1, -1));
             content.add(projectField, new GridConstraints(0, 0, 1, 1,
                 GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
                 GridConstraints.SIZEPOLICY_WANT_GROW,
@@ -205,9 +206,17 @@ public class MainPanel {
                 GridConstraints.SIZEPOLICY_CAN_SHRINK,
                 null, null, null));
 
+            //---- shouldSubmitCheckbox ----
+            shouldSubmitCheckbox.setText("Automatically press submit button on Teams");
+            content.add(shouldSubmitCheckbox, new GridConstraints(2, 0, 1, 3,
+                GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                null, null, null));
+
             //---- spacerLabel ----
             spacerLabel.setText(" ");
-            content.add(spacerLabel, new GridConstraints(2, 0, 1, 4,
+            content.add(spacerLabel, new GridConstraints(3, 0, 1, 4,
                 GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
@@ -215,7 +224,7 @@ public class MainPanel {
 
             //---- logLabel ----
             logLabel.setText("Log");
-            content.add(logLabel, new GridConstraints(3, 0, 1, 1,
+            content.add(logLabel, new GridConstraints(4, 0, 1, 1,
                 GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK,
@@ -228,7 +237,7 @@ public class MainPanel {
                 logPane.setEditable(false);
                 scrollPane.setViewportView(logPane);
             }
-            content.add(scrollPane, new GridConstraints(4, 0, 1, 4,
+            content.add(scrollPane, new GridConstraints(5, 0, 1, 4,
                 GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW | GridConstraints.SIZEPOLICY_WANT_GROW,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW | GridConstraints.SIZEPOLICY_WANT_GROW,
@@ -236,7 +245,7 @@ public class MainPanel {
 
             //---- updateBackendButton ----
             updateBackendButton.setText("Update");
-            content.add(updateBackendButton, new GridConstraints(5, 3, 1, 1,
+            content.add(updateBackendButton, new GridConstraints(6, 3, 1, 1,
                 GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK,
                 GridConstraints.SIZEPOLICY_CAN_SHRINK,
@@ -254,6 +263,7 @@ public class MainPanel {
     private JLabel taskStatusLabel;
     private JLabel taskStatusArrowLabel;
     private JComboBox<String> taskStatusDropdown;
+    private JCheckBox shouldSubmitCheckbox;
     private JLabel spacerLabel;
     private JLabel logLabel;
     private JScrollPane scrollPane;
