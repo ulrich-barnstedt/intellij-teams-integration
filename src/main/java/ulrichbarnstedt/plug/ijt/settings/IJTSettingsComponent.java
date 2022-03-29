@@ -14,7 +14,7 @@ public class IJTSettingsComponent {
     public IJTSettingsComponent () {
         mainPanel = FormBuilder.createFormBuilder()
             .addLabeledComponent(new JBLabel("Teams ID:"), idTextField, 1, false)
-            .addLabeledComponent(new JBLabel("Repository name:"), repoTextField, 1, false)
+            .addLabeledComponent(new JBLabel("Repository name: (<full-repo-name>/src/<master-branch>/POS3)"), repoTextField, 1, true)
             .getPanel();
     }
 
